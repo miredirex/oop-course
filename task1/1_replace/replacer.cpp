@@ -15,9 +15,8 @@ Replacer::Replacer(const char *filename) {
 
 bool Replacer::ParseLine(string &outputLine) {
     string exportString;
-    getline(inputFile, exportString);
 
-    if (exportString.empty() || exportString == "\n") {
+    if (!getline(inputFile, exportString)) {
         return false;
     } else {
         outputLine = exportString;
