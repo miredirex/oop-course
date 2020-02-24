@@ -1,0 +1,5 @@
+Is tHERE a support for new lines?
+Let's check it out HERE, right HERE.
+right
+now
+And HERE is a longer sentence123

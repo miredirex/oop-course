@@ -1,0 +1,5 @@
+Is there a support for new lines?
+Let's check it out here, right here.
+right
+now
+And here is a longer sentence123
