@@ -33,7 +33,7 @@ std::string Replacer::ReplaceAllOccurrences(const string &target, const char *se
 
     while (cursorPosition <= target.length()) {
         if (target[cursorPosition] == searchString[0]) {
-            if (IsFullWordMet(target, searchString, cursorPosition)) {
+            if (HasFullWordMet(target, searchString, cursorPosition)) {
                 result += replaceString;
                 // Jump ahead of the word after replacement
                 cursorPosition += strlen(searchString);
@@ -46,9 +46,9 @@ std::string Replacer::ReplaceAllOccurrences(const string &target, const char *se
     return result;
 }
 
-bool Replacer::IsFullWordMet(const std::string &target, const char *searchString, unsigned int pos) {
+bool Replacer::HasFullWordMet(const std::string &target, const char *searchString, unsigned int cursorPosition) {
     for (unsigned int i = 0; i < strlen(searchString); i++) {
-        auto scanPosition = pos + i;
+        auto scanPosition = cursorPosition + i;
         if (target[scanPosition] != searchString[i]) {
             return false;
         }

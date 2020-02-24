@@ -10,6 +10,9 @@ private:
 
     std::ifstream inputFile;
     std::ofstream outputFile;
+
+    static bool HasFullWordMet(const std::string &target, const char *searchString, unsigned int cursorPosition);
+
 public:
     Replacer(const char *filename);
 
@@ -17,9 +20,7 @@ public:
 
     bool ParseLine(std::string &outputLine);
 
-    std::string ReplaceAllOccurrences(const std::string &target, const char *searchString, const char *replaceString);
-
-    bool IsFullWordMet(const std::string &target, const char *searchString, unsigned int cursorPosition);
+    static std::string ReplaceAllOccurrences(const std::string &target, const char *searchString, const char *replaceString);
 
     void AppendResult(const char *outputFilename, const std::string &line);
 };
