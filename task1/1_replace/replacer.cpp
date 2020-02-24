@@ -6,6 +6,7 @@ using namespace std;
 
 Replacer::Replacer(const char *filename) {
     inputFile = ifstream(filename);
+
     if (!inputFile.is_open()) {
         printf("Input file not found\n");
         exit(NOT_FOUND_ERROR_CODE);
@@ -15,11 +16,13 @@ Replacer::Replacer(const char *filename) {
 bool Replacer::ParseLine(string &outputLine) {
     string exportString;
     getline(inputFile, exportString);
+
     if (exportString.empty() || exportString == "\n") {
         return false;
     } else {
         outputLine = exportString;
     }
+
     return true;
 }
 
