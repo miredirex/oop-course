@@ -89,12 +89,28 @@ fc "Expected Output\%InputFile%" "%TEMP%\output.txt" || goto :failed
 echo Test %CurrentTest% successful
 set /A successful+=1
 
+rem #11. Замена слова в длинном тексте
+set /A CurrentTest+=1
+set InputFile="11loremipsum.txt"
+%ReplaceProgram% %InputFile% "%TEMP%\output.txt" amet privet || goto :failed
+fc "Expected Output\%InputFile%" "%TEMP%\output.txt" || goto :failed
+echo Test %CurrentTest% successful
+set /A successful+=1
+
+rem #11. searchString = ""
+set /A CurrentTest+=1
+set InputFile="12justempty.txt"
+%ReplaceProgram% %InputFile% "%TEMP%\output.txt" "" "zameni" || goto :failed
+fc "Expected Output\%InputFile%" "%TEMP%\output.txt" || goto :failed
+echo Test %CurrentTest% successful
+set /A successful+=1
+
 rem Тесты прошли успешно
-echo Tests passed: %successful%/10
+echo Tests passed: %successful%/12
 echo All tests successful
 exit /B 0
 
 :failed
 echo Failed test %CurrentTest%
-echo Tests passed: %successful%/10
+echo Tests passed: %successful%/12
 exit /B 1
