@@ -11,10 +11,17 @@ private:
     std::ifstream inputFile;
     std::ofstream outputFile;
 public:
-    Replacer(const char* filename);
+    Replacer(const char *filename);
+
     ~Replacer();
-    bool ParseLine(std::string& outputLine);
-    std::string ReplaceAllOccurrences(std::string target, const char* searchString, const char* replaceString);
-    void AppendResult(const char* outputFilename, std::string line);
+
+    bool ParseLine(std::string &outputLine);
+
+    std::string ReplaceAllOccurrences(const std::string &target, const char *searchString, const char *replaceString);
+
+    bool IsFullWordMet(const std::string &target, const char *searchString, unsigned int cursorPosition);
+
+    void AppendResult(const char *outputFilename, const std::string &line);
 };
+
 #endif //REPLACER_H

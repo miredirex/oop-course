@@ -3,24 +3,23 @@
 
 using namespace std;
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[]) {
     if (argc != 5) {
         printf("Usage: replace.exe <input file> <output file> <search string> <replace string>\n");
         return 0;
     }
-    const char* inputFile = argv[1];
-    const char* outputFile = argv[2];
+    const char *inputFile = argv[1];
+    const char *outputFile = argv[2];
 
-    const char* searchString = argv[3];
-    const char* replaceString = argv[4];
+    const char *searchString = argv[3];
+    const char *replaceString = argv[4];
 
     Replacer replacer(inputFile);
     string newLine;
+
     while (replacer.ParseLine(newLine)) {
-        cout << newLine;
-        //string modified = replacer.ReplaceAllOccurrences(searchString, replaceString);
-        //cout << modified;
-        //replacer.AppendResult(outputFile, modified);
+        string modified = replacer.ReplaceAllOccurrences(newLine, searchString, replaceString);
+        replacer.AppendResult(outputFile, modified);
     }
     return 0;
 }
