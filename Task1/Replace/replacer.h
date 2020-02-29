@@ -7,6 +7,7 @@
 class Replacer {
 private:
     const int NOT_FOUND_ERROR_CODE = 404;
+    const int IO_ERROR_CODE = 2;
 
     std::ifstream inputFile;
     std::ofstream outputFile;

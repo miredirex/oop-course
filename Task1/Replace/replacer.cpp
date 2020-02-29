@@ -64,6 +64,15 @@ void Replacer::AppendResult(const char *outputFilename, const std::string &line)
 }
 
 Replacer::~Replacer() {
+    // End I/O work
+    if (inputFile.bad()) {
+        printf("Error: can not read from input file\n");
+        exit(IO_ERROR_CODE);
+    }
     inputFile.close();
+    if(!outputFile.flush()) {
+        printf("Error: can not write to output file\n");
+        exit(IO_ERROR_CODE);
+    }
     outputFile.close();
 }

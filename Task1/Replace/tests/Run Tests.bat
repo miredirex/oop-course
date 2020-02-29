@@ -97,7 +97,7 @@ fc "Expected Output\%InputFile%" "%TEMP%\output.txt" || goto :failed
 echo Test %CurrentTest% successful
 set /A successful+=1
 
-rem #11. searchString = ""
+rem #12. searchString = ""
 set /A CurrentTest+=1
 set InputFile="12justempty.txt"
 %ReplaceProgram% %InputFile% "%TEMP%\output.txt" "" "zameni" || goto :failed
@@ -105,12 +105,45 @@ fc "Expected Output\%InputFile%" "%TEMP%\output.txt" || goto :failed
 echo Test %CurrentTest% successful
 set /A successful+=1
 
+rem #13. Если input файл не предоставлен
+set /A CurrentTest+=1
+%ReplaceProgram% "" "%TEMP%\output.txt" "1" "2" > nul && goto :failed
+echo Test %CurrentTest% successful
+set /A successful+=1
+
+rem #14. Если input файл не найден
+set /A CurrentTest+=1
+set InputFile="this_file_doesnt_exist.txt"
+%ReplaceProgram% "%InputFile%" "%TEMP%\output.txt" "1" "2" > nul && goto :failed
+echo Test %CurrentTest% successful
+set /A successful+=1
+
+rem #15. Если output файл не предоставлен
+set /A CurrentTest+=1
+set InputFile="1experiment_to_task.txt"
+%ReplaceProgram% "%InputFile%" "" "1" "2" > nul && goto :failed
+echo Test %CurrentTest% successful
+set /A successful+=1
+
+rem #16. Если оба файла не предоставлены
+set /A CurrentTest+=1
+%ReplaceProgram% "" "" "1" "2" > nul && goto :failed
+echo Test %CurrentTest% successful
+set /A successful+=1
+
+rem #17. Без аргументов не должна выполняться
+set /A CurrentTest+=1
+%ReplaceProgram% > nul && goto :failed
+echo Test %CurrentTest% successful
+set /A successful+=1
+
+
 rem Тесты прошли успешно
-echo Tests passed: %successful%/12
+echo Tests passed: %successful%/17
 echo All tests successful
 exit /B 0
 
 :failed
 echo Failed test %CurrentTest%
-echo Tests passed: %successful%/12
+echo Tests passed: %successful%/17
 exit /B 1

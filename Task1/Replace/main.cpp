@@ -6,7 +6,7 @@ using namespace std;
 int main(int argc, char *argv[]) {
     if (argc != 5) {
         printf("Usage: replace.exe <input file> <output file> <search string> <replace string>\n");
-        return 0;
+        return 1;
     }
     const char *inputFile = argv[1];
     const char *outputFile = argv[2];
