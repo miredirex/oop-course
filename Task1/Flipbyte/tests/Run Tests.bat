@@ -85,13 +85,32 @@ set /A CurrentTest+=1
 echo Test %CurrentTest% successful
 set /A successful+=1
 
+rem #12. Число может начинаться с нулей (00000000123)
+set /A CurrentTest+=1
+%FlipByteProgram% 00000000123 > %TempOutput% || goto :failed
+set /p Answer=<%TempOutput%
+if %Answer% NEQ 222 goto :failed
+echo Test %CurrentTest% successful
+set /A successful+=1
+
+rem #13. Число может начинаться с нулей, но по-прежнему не может превышать границы (00000000256)
+set /A CurrentTest+=1
+%FlipByteProgram% 00000000256 > nul && goto :failed
+echo Test %CurrentTest% successful
+set /A successful+=1
+
+rem #14. Странные числа
+set /A CurrentTest+=1
+%FlipByteProgram% "00000000-6" > nul && goto :failed
+echo Test %CurrentTest% successful
+set /A successful+=1
 
 rem Тесты прошли успешно
-echo Tests passed: %successful%/11
+echo Tests passed: %successful%/14
 echo All tests successful
 exit /B 0
 
 :failed
 echo Failed test %CurrentTest%
-echo Tests passed: %successful%/11
+echo Tests passed: %successful%/14
 exit /B 1

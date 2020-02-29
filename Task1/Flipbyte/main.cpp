@@ -3,12 +3,20 @@
 bool IsArgumentAnIntegerNumber(char* arg) {
     const uint8_t MAX_ARG_LENGTH = 3; // 0 - 255 are the only valid values
 
-    for (uint8_t i = 0; arg[i] != '\0'; i++) {
-        if (!isdigit(arg[i])) {
+    bool hasNonZeroMet = false;
+    char* firstNonZeroIndex = nullptr; // To allow entering values like this: 000000000123
+
+    for (char* i = arg; *i != '\0'; i++) {
+        char ch = *i;
+        if (ch != '0' && !hasNonZeroMet) {
+            hasNonZeroMet = true;
+            firstNonZeroIndex = i;
+        }
+        if (!isdigit(ch)) {
             printf("Input value should only contain digits\n");
             return false;
         }
-        if (i >= MAX_ARG_LENGTH) {
+        if (hasNonZeroMet && (i - firstNonZeroIndex >= MAX_ARG_LENGTH)) {
             printf("Input value is too big.\n");
             return false;
         }
