@@ -1,8 +1,6 @@
 #include <iostream>
 #include "replacer.h"
 
-using namespace std;
-
 int main(int argc, char *argv[]) {
     if (argc != 5) {
         printf("Usage: replace.exe <input file> <output file> <search string> <replace string>\n");
@@ -15,10 +13,10 @@ int main(int argc, char *argv[]) {
     const char *replaceString = argv[4];
 
     Replacer replacer(inputFile);
-    string newLine;
+    std::string newLine;
 
     while (replacer.ParseLine(newLine)) {
-        string modified = Replacer::ReplaceAllOccurrences(newLine, searchString, replaceString);
+        std::string modified = Replacer::ReplaceAllOccurrences(newLine, searchString, replaceString);
         replacer.AppendResult(outputFile, modified);
     }
     return 0;

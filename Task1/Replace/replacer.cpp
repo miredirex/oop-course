@@ -2,10 +2,8 @@
 #include <iostream>
 #include <cstring>
 
-using namespace std;
-
 Replacer::Replacer(const char *filename) {
-    inputFile = ifstream(filename);
+    inputFile = std::ifstream(filename);
 
     if (!inputFile.is_open()) {
         printf("Input file not found\n");
@@ -13,8 +11,8 @@ Replacer::Replacer(const char *filename) {
     }
 }
 
-bool Replacer::ParseLine(string &outputLine) {
-    string exportString;
+bool Replacer::ParseLine(std::string &outputLine) {
+    std::string exportString;
 
     if (!getline(inputFile, exportString)) {
         return false;
@@ -25,10 +23,10 @@ bool Replacer::ParseLine(string &outputLine) {
     return true;
 }
 
-std::string Replacer::ReplaceAllOccurrences(const string &target, const char *searchString, const char *replaceString) {
+std::string Replacer::ReplaceAllOccurrences(const std::string &target, const char *searchString, const char *replaceString) {
     if (searchString[0] == '\0') return target;
 
-    string result;
+    std::string result;
     unsigned int cursorPosition = 0;
 
     while (cursorPosition <= target.length()) {
@@ -58,7 +56,7 @@ bool Replacer::HasFullWordMet(const std::string &target, const char *searchStrin
 
 void Replacer::AppendResult(const char *outputFilename, const std::string &line) {
     if (!outputFile.is_open()) {
-        outputFile = ofstream(outputFilename);
+        outputFile = std::ofstream(outputFilename);
     }
     outputFile << line;
 }
