@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
     string newLine;
 
     while (replacer.ParseLine(newLine)) {
-        string modified = replacer.ReplaceAllOccurrences(newLine, searchString, replaceString);
+        string modified = Replacer::ReplaceAllOccurrences(newLine, searchString, replaceString);
         replacer.AppendResult(outputFile, modified);
     }
     return 0;
