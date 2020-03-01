@@ -7,6 +7,16 @@ set CurrentTest=0
 set Answer=0
 set TempOutput="%TEMP%/flipbyte_output.txt"
 
+if %FlipByteProgram%=="" (
+    echo Please specify path to the executable
+    echo Usage: RunTests.bat executable.exe
+    exit /B 1
+)
+if not exist %FlipByteProgram% (
+    echo Executable not found, check the path and try again
+    exit /B 1
+)
+
 rem --- Тесты ---
 
 rem #1. 6 = 96

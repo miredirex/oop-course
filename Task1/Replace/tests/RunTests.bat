@@ -6,6 +6,15 @@ set SuccessfulTests=0
 set CurrentTest=0
 set InputFile=""
 
+if %ReplaceProgram%=="" (
+    echo Please specify path to the executable
+    echo Usage: RunTests.bat executable.exe
+    exit /B 1
+)
+if not exist %ReplaceProgram% (
+    echo Executable not found, check the path and try again
+    exit /B 1
+)
 
 rem --- Тесты ---
 
