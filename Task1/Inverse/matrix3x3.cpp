@@ -22,11 +22,12 @@ void Matrix3x3::SetValueAt(unsigned int row, unsigned int col, double value) {
     matrix[row][col] = value;
 }
 
-void Matrix3x3::PrintMatrix(std::ostream& stream, const char separator) {
+void Matrix3x3::PrintMatrix(std::ostream& stream, const char separator, unsigned int decimalPlaces) {
     for (unsigned int i = 0; i < MATRIX_SIZE; i++) {
         for (unsigned int j = 0; j < MATRIX_SIZE; j++) {
-            stream << round(matrix[i][j] * 1000.0) / 1000.0;
-            if (j != MATRIX_SIZE) stream << separator;
+            double value = matrix[i][j] + 0.0; // To avoid -0.0 values
+            stream << round(value * pow(10.0, decimalPlaces)) / pow(10.0, decimalPlaces);
+            if (j < MATRIX_SIZE - 1) stream << separator;
         }
         stream << std::endl;
     }
@@ -84,7 +85,8 @@ std::optional<Matrix3x3> Matrix3x3::GetInverseMatrix() {
 
     for (unsigned int i = 0; i < MATRIX_SIZE; i++) {
         for (unsigned int j = 0; j < MATRIX_SIZE; j++) {
-            double minorDeterminant = pow(-1, (i+1)+(j+1)) * GetMinor(i, j).GetDeterminant();
+            int sign = pow(-1, (i+1)+(j+1));
+            double minorDeterminant = sign * GetMinor(i, j).GetDeterminant();
             inverse.SetValueAt(i, j, 1 / det * minorDeterminant);
         }
     }

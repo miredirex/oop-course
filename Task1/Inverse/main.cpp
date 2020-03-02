@@ -12,7 +12,7 @@ int main(int argc, char *argv[]) {
     std::optional<Matrix3x3> inverse = matrix.GetInverseMatrix();
 
     if (inverse.has_value()) {
-        inverse->PrintMatrix(std::cout, '\t');
+        inverse->PrintMatrix(std::cout, '\t', 3);
     } else {
         printf("Determinant of the matrix is 0. Inverse matrix can not be found.\n");
         return 1;

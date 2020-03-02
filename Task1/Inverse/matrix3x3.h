@@ -6,6 +6,7 @@
 #include <optional>
 #include <fstream>
 #include <cmath>
+#include <iomanip>
 
 class Matrix3x3 {
 public:
@@ -29,7 +30,7 @@ public:
 
     std::optional<Matrix3x3> GetInverseMatrix();
 
-    void PrintMatrix(std::ostream& stream, const char separator);
+    void PrintMatrix(std::ostream& stream, const char separator, unsigned int decimalPlaces);
 
 private:
     std::optional<double> determinant;
