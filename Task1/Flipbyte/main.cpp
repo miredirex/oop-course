@@ -1,4 +1,5 @@
 #include <iostream>
+#include <optional>
 
 bool IsArgumentAnIntegerNumber(char* arg) {
     const uint8_t MAX_ARG_LENGTH = 3; // 0 - 255 are the only valid values
@@ -24,12 +25,12 @@ bool IsArgumentAnIntegerNumber(char* arg) {
     return true;
 }
 
-uint8_t GetByteOrFail(char* byte) {
+std::optional<uint8_t> GetByte(char* byte) {
     int received = std::stoi(byte);
 
     if (received < 0 || received > UINT8_MAX) {
         printf("Input value doesn't fit into a single byte\n");
-        exit(1);
+        return std::nullopt;
     } else {
         return received;
     }
@@ -54,12 +55,16 @@ int main(int argc, char *argv[]) {
     }
 
     if (IsArgumentAnIntegerNumber(argv[1])) {
-        // Fail if not in 0-255 range
-        uint8_t byte = GetByteOrFail(argv[1]);
-        uint8_t flipped = FlipBits(byte);
+        // nullopt if not in 0-255 range
+        std::optional<uint8_t> byte = GetByte(argv[1]);
+        if (byte.has_value()) {
+            uint8_t flipped = FlipBits(*byte);
 
-        // Print value as integer
-        std::cout << (unsigned int)flipped << std::endl;
+            // Print value as integer
+            std::cout << (unsigned int)flipped << std::endl;
+        } else {
+            return 1;
+        }
     } else {
         return 1;
     }
