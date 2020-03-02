@@ -37,14 +37,10 @@ std::optional<uint8_t> GetByte(char* byte) {
 }
 
 uint8_t FlipBits(uint8_t originalByte) {
-    const uint8_t NUM_OF_BITS = 8;
-    uint8_t reversed = 0;
-
-    for (uint8_t i = 0; i < NUM_OF_BITS; i++) {
-        if (originalByte & (1u << i)) {
-            reversed |= 1u << (NUM_OF_BITS - 1u - i);
-        }
-    }
+    uint8_t reversed = originalByte;
+    reversed = (reversed & 0xF0) >> 4u | (reversed & 0x0F) << 4;
+    reversed = (reversed & 0xCC) >> 2u | (reversed & 0x33) << 2;
+    reversed = (reversed & 0xAA) >> 1u | (reversed & 0x55) << 1;
     return reversed;
 }
 
