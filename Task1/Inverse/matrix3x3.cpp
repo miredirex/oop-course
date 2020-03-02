@@ -1,7 +1,7 @@
 #include "matrix3x3.h"
 
-Matrix3x3::Matrix3x3(const char* input) {
-    std::ifstream filein(input);
+Matrix3x3::Matrix3x3(const char* inputFileName) {
+    std::ifstream filein(inputFileName);
     if (!filein.is_open() || filein.bad()) {
         printf("Input file can not be opened\n");
         exit(1);
