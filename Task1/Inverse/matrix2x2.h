@@ -3,7 +3,8 @@
 
 #include <optional>
 
-class Matrix2x2 {
+class Matrix2x2
+{
 public:
     static const unsigned int MATRIX_SIZE = 2;
 
@@ -15,13 +16,17 @@ public:
 
     double GetDeterminant();
 
-    Matrix2x2 GetTransposed();
+    double GetValueAt(unsigned int row, unsigned int col) const;
+
+    void SetValueAt(unsigned int row, unsigned int col, double value);
+
+    Matrix2x2 GetTransposed() const;
 
     std::optional<Matrix2x2> GetInverseMatrix();
 
 private:
-    std::optional<double> determinant;
-    double matrix[MATRIX_SIZE][MATRIX_SIZE] = { 0.0 };
+    std::optional<double> m_determinant;
+    double m_matrix[MATRIX_SIZE][MATRIX_SIZE] = { 0.0 };
 };
 
 #endif //INVERSE_MATRIX2X2_H

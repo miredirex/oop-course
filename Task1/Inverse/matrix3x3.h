@@ -8,7 +8,8 @@
 #include <cmath>
 #include <iomanip>
 
-class Matrix3x3 {
+class Matrix3x3
+{
 public:
     static const unsigned int MATRIX_SIZE = 3;
 
@@ -16,25 +17,21 @@ public:
 
     Matrix3x3(double arr[MATRIX_SIZE * MATRIX_SIZE]);
 
-    Matrix3x3(std::istream& inputFileName);
-
     double GetDeterminant();
 
-    double GetValueAt(unsigned int row, unsigned int col);
+    double GetValueAt(unsigned int row, unsigned int col) const;
 
     void SetValueAt(unsigned int row, unsigned int col, double value);
 
-    Matrix2x2 GetMinor(unsigned int blockingRow, unsigned int blockingColumn);
+    Matrix2x2 GetMinor(unsigned int blockingRow, unsigned int blockingColumn) const;
 
-    Matrix3x3 GetTransposed();
+    Matrix3x3 GetTransposed() const;
 
     std::optional<Matrix3x3> GetInverseMatrix();
 
-    void PrintMatrix(std::ostream& stream, const char separator, unsigned int decimalPlaces);
-
 private:
-    std::optional<double> determinant;
-    double matrix[MATRIX_SIZE][MATRIX_SIZE] = {0.0};
+    std::optional<double> m_determinant;
+    double m_matrix[MATRIX_SIZE][MATRIX_SIZE] = {0.0};
 };
 
 #endif //INVERSE_MATRIX3X3_H
