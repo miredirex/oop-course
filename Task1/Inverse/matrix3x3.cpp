@@ -1,15 +1,9 @@
 #include "matrix3x3.h"
 
-Matrix3x3::Matrix3x3(const char* inputFileName) {
-    std::ifstream filein(inputFileName);
-    if (!filein.is_open() || filein.bad()) {
-        printf("Input file can not be opened\n");
-        exit(1);
-    }
-
+Matrix3x3::Matrix3x3(std::istream& inputFileName) {
     for (unsigned int i = 0; i < MATRIX_SIZE; i++) {
         for (unsigned int j = 0; j < MATRIX_SIZE; j++) {
-            filein >> matrix[i][j];
+            inputFileName >> matrix[i][j];
         }
     }
 }

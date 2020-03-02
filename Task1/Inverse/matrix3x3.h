@@ -16,7 +16,7 @@ public:
 
     Matrix3x3(double arr[MATRIX_SIZE * MATRIX_SIZE]);
 
-    Matrix3x3(const char *inputFileName);
+    Matrix3x3(std::istream& inputFileName);
 
     double GetDeterminant();
 
