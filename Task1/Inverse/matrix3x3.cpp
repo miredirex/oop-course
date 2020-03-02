@@ -11,7 +11,7 @@ void Matrix3x3::SetValueAt(unsigned int row, unsigned int col, double value)
     m_determinant.reset();
 }
 
-double Matrix3x3::GetDeterminant()
+double Matrix3x3::GetDeterminant() const
 {
     if (!m_determinant.has_value())
     {
@@ -62,7 +62,7 @@ Matrix3x3 Matrix3x3::GetTransposed() const
     return transposed;
 }
 
-std::optional<Matrix3x3> Matrix3x3::GetInverseMatrix()
+std::optional<Matrix3x3> Matrix3x3::GetInverseMatrix() const
 {
     double det = GetDeterminant();
 

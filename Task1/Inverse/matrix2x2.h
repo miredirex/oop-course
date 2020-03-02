@@ -14,7 +14,7 @@ public:
 
     Matrix2x2(const double arr[MATRIX_SIZE * MATRIX_SIZE]);
 
-    double GetDeterminant();
+    double GetDeterminant() const;
 
     double GetValueAt(unsigned int row, unsigned int col) const;
 
@@ -22,10 +22,10 @@ public:
 
     Matrix2x2 GetTransposed() const;
 
-    std::optional<Matrix2x2> GetInverseMatrix();
+    std::optional<Matrix2x2> GetInverseMatrix() const;
 
 private:
-    std::optional<double> m_determinant;
+    mutable std::optional<double> m_determinant;
     double m_matrix[MATRIX_SIZE][MATRIX_SIZE] = { 0.0 };
 };
 

@@ -16,7 +16,7 @@ Matrix2x2::Matrix2x2(const double arr[MATRIX_SIZE * MATRIX_SIZE])
     m_matrix[1][1] = arr[3];
 }
 
-double Matrix2x2::GetDeterminant()
+double Matrix2x2::GetDeterminant() const
 {
     if (!m_determinant.has_value())
     {
@@ -45,7 +45,7 @@ Matrix2x2 Matrix2x2::GetTransposed() const
     };
 }
 
-std::optional<Matrix2x2> Matrix2x2::GetInverseMatrix()
+std::optional<Matrix2x2> Matrix2x2::GetInverseMatrix() const
 {
     double det = this->GetDeterminant();
     if (det == 0)

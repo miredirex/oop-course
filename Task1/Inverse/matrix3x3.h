@@ -17,7 +17,7 @@ public:
 
     Matrix3x3(double arr[MATRIX_SIZE * MATRIX_SIZE]);
 
-    double GetDeterminant();
+    double GetDeterminant() const;
 
     double GetValueAt(unsigned int row, unsigned int col) const;
 
@@ -27,10 +27,10 @@ public:
 
     Matrix3x3 GetTransposed() const;
 
-    std::optional<Matrix3x3> GetInverseMatrix();
+    std::optional<Matrix3x3> GetInverseMatrix() const;
 
 private:
-    std::optional<double> m_determinant;
+    mutable std::optional<double> m_determinant;
     double m_matrix[MATRIX_SIZE][MATRIX_SIZE] = {0.0};
 };
 
