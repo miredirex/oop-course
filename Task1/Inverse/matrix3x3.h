@@ -26,7 +26,7 @@ public:
 
     Matrix2x2 GetMinor(unsigned int blockingRow, unsigned int blockingColumn);
 
-    Matrix3x3 Transpose();
+    Matrix3x3 GetTransposed();
 
     std::optional<Matrix3x3> GetInverseMatrix();
 

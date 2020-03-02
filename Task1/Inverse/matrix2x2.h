@@ -15,7 +15,7 @@ public:
 
     double GetDeterminant();
 
-    Matrix2x2 Transpose();
+    Matrix2x2 GetTransposed();
 
     std::optional<Matrix2x2> GetInverseMatrix();
 

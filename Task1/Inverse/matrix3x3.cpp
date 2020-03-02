@@ -57,7 +57,7 @@ Matrix2x2 Matrix3x3::GetMinor(unsigned int blockingRow, unsigned int blockingCol
     return Matrix2x2 { values };
 }
 
-Matrix3x3 Matrix3x3::Transpose() {
+Matrix3x3 Matrix3x3::GetTransposed() {
     Matrix3x3 transposed;
     for (unsigned int i = 0; i < MATRIX_SIZE; i++) {
         for (unsigned int j = 0; j < MATRIX_SIZE; j++) {
@@ -84,5 +84,5 @@ std::optional<Matrix3x3> Matrix3x3::GetInverseMatrix() {
             inverse.SetValueAt(i, j, 1 / det * minorDeterminant);
         }
     }
-    return inverse.Transpose();
+    return inverse.GetTransposed();
 }

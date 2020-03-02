@@ -21,7 +21,7 @@ double Matrix2x2::GetDeterminant() {
     return *determinant;
 }
 
-Matrix2x2 Matrix2x2::Transpose() {
+Matrix2x2 Matrix2x2::GetTransposed() {
     return Matrix2x2 {
         matrix[0][0], matrix[1][0],
         matrix[0][1], matrix[1][1]
