@@ -48,9 +48,9 @@ std::optional<uint8_t> GetByte(char* byte)
 uint8_t FlipBits(uint8_t originalByte)
 {
     uint8_t reversed = originalByte;
-    reversed = (reversed & 0xF0) >> 4u | (reversed & 0x0F) << 4;
-    reversed = (reversed & 0xCC) >> 2u | (reversed & 0x33) << 2;
-    reversed = (reversed & 0xAA) >> 1u | (reversed & 0x55) << 1;
+    reversed = (reversed & 0xF0u) >> 4u | (reversed & 0x0Fu) << 4u;
+    reversed = (reversed & 0xCCu) >> 2u | (reversed & 0x33u) << 2u;
+    reversed = (reversed & 0xAAu) >> 1u | (reversed & 0x55u) << 1u;
     return reversed;
 }
 
