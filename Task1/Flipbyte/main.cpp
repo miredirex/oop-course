@@ -18,12 +18,10 @@ bool IsArgumentAnIntegerNumber(char* arg)
         }
         if (!isdigit(ch))
         {
-            printf("Input value should only contain digits\n");
             return false;
         }
         if (hasNonZeroMet && (i - firstNonZeroIndex >= MAX_ARG_LENGTH))
         {
-            printf("Input value is too big.\n");
             return false;
         }
     }
@@ -36,7 +34,6 @@ std::optional<uint8_t> GetByte(char* byte)
 
     if (received < 0 || received > UINT8_MAX)
     {
-        printf("Input value doesn't fit into a single byte\n");
         return std::nullopt;
     }
     else
@@ -75,11 +72,13 @@ int main(int argc, char *argv[])
         }
         else
         {
+            printf("Input value doesn't fit into a single byte\n");
             return 1;
         }
     }
     else
     {
+        printf("Input value is incorrect. It should be an integer in 0-255 range.\n");
         return 1;
     }
 
