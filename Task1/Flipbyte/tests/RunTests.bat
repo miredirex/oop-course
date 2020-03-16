@@ -109,18 +109,12 @@ set /A CurrentTest+=1
 echo Test %CurrentTest% successful
 set /A successful+=1
 
-rem #14. Странные числа
-set /A CurrentTest+=1
-%FlipByteProgram% "00000000-6" > nul && goto :failed
-echo Test %CurrentTest% successful
-set /A successful+=1
-
 rem Тесты прошли успешно
-echo Tests passed: %successful%/14
+echo Tests passed: %successful%/13
 echo All tests successful
 exit /B 0
 
 :failed
 echo Failed test %CurrentTest%
-echo Tests passed: %successful%/14
+echo Tests passed: %successful%/13
 exit /B 1
