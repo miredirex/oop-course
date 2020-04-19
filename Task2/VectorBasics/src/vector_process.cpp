@@ -1,6 +1,6 @@
 #include "vector_process.h"
 
-void DivideElementsOnHalvedMax(std::vector<double>& vec)
+void DivideElementsByHalfMax(std::vector<double>& vec)
 {
     if (vec.empty()) return;
 
