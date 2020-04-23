@@ -14,7 +14,7 @@ TEST_CASE("Simple sentences with HTML entities")
             "I'll \"walk\" the <b>dog</b> now");
 }
 
-TEST_CASE("Simple sentences with HTML entities on both ends")
+TEST_CASE("HTML entities on both ends")
 {
     REQUIRE(HtmlDecode("&amp;ABC&quot;") == "&ABC\"");
 }
@@ -27,6 +27,7 @@ TEST_CASE("Incomplete/invalid html entities")
 
     REQUIRE(HtmlDecode("&&&&&&....&;") == "&&&&&&....&;");
     REQUIRE(HtmlDecode("&&&&&&&&&&") == "&&&&&&&&&&");
+    REQUIRE(HtmlDecode("&amp;lt;") != "<");
 }
 
 TEST_CASE("Empty string")
