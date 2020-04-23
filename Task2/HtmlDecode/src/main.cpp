@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "htmldecode.h"
+#include <htmldecode/htmldecode.h>
 
 int main()
 {

@@ -1,5 +1,5 @@
+#include <htmldecode/htmldecode.h>
 #include "catch_runner.h"
-#include "../src/htmldecode.h"
 
 using namespace std;
 

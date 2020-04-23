@@ -1,4 +1,4 @@
-#include "htmldecode.h"
+#include <htmldecode/htmldecode.h>
 
 std::unordered_map<std::string, char>& GetHtmlEntitiesMap()
 {
