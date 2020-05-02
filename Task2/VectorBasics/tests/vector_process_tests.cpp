@@ -26,7 +26,7 @@ TEST_CASE("Empty vector results in empty vector")
 TEST_CASE("Max value in vector of same values equals any value")
 {
     vector<double> test { 3, 3, 3, 3, 3, 3 };
-    vector<double> expected { 2/1.5, 2/1.5, 2/1.5, 2/1.5, 2/1.5, 2/1.5 };
+    vector<double> expected { 3/1.5, 3/1.5, 3/1.5, 3/1.5, 3/1.5, 3/1.5 };
 
     DivideElementsByHalfMax(test);
 
