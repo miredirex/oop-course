@@ -9,13 +9,7 @@
  */
 int main()
 {
-    // Get first line from std::cin
-    std::string inputLine;
-    std::getline(std::cin, inputLine);
-
-    std::vector<double> vectorOfDoubles;
-    // Pass line with space separated values to form a vector
-    SeparatedValuesToVector(inputLine, vectorOfDoubles);
+    std::vector<double> vectorOfDoubles(std::istream_iterator<double>(std::cin), (std::istream_iterator<double>()));
 
     try
     {
