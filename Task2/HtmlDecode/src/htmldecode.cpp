@@ -1,13 +1,15 @@
 #include <htmldecode/htmldecode.h>
 
-std::unordered_map<std::string, char>& GetHtmlEntitiesMap()
+EntityMap const& GetHtmlEntitiesMap()
 {
-    static std::unordered_map<std::string, char> htmlEntityMap = {
+    static EntityMap htmlEntityMap = {
+        {
             { "&quot;", '"' },
             { "&apos;", '\'' },
             { "&lt;",   '<' },
             { "&gt;",   '>' },
             { "&amp;",  '&' }
+        }
     };
 
     return htmlEntityMap;
@@ -32,9 +34,9 @@ std::string HtmlDecode(const std::string& html)
             {
                 auto index = it - html.begin();
                 // From current index, substr length of possible entity and perform search on that
-                size_t escapedOccurrence = html.substr(index, escaped.length()).find(escaped);
+                bool isEntityFound = (html.substr(index, escaped.length()) == escaped);
                 // Replace if found
-                if (escapedOccurrence != std::string::npos)
+                if (isEntityFound)
                 {
                     decoded += unescaped;
                     it += escaped.length();

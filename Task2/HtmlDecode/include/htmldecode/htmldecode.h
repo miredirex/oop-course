@@ -2,12 +2,14 @@
 #define HTMLDECODE_H
 
 #include <string>
-#include <unordered_map>
-
-std::string HtmlDecode(std::string const& html);
-
-std::unordered_map<std::string, char>& GetHtmlEntitiesMap();
+#include <array>
 
 const char ENTITY_IDENTIFIER = '&';
+const size_t ENTITIES_COUNT = 5u;
+using EntityMap = std::array<std::pair<std::string, char>, ENTITIES_COUNT>;
+
+EntityMap const& GetHtmlEntitiesMap();
+
+std::string HtmlDecode(std::string const& html);
 
 #endif //HTMLDECODE_H

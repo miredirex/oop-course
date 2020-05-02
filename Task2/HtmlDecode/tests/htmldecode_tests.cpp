@@ -30,12 +30,12 @@ TEST_CASE("Incomplete/invalid html entities")
     REQUIRE(HtmlDecode("&amp;lt;") != "<");
 }
 
-TEST_CASE("Empty string")
+TEST_CASE("Empty string shouldn't be modified at all")
 {
     REQUIRE(HtmlDecode("") == "");
 }
 
-TEST_CASE("Single '&' character")
+TEST_CASE("Single '&' character shouldn't loop the function")
 {
     REQUIRE(HtmlDecode("&") == "&");
 }
