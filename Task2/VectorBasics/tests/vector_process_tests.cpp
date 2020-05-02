@@ -3,7 +3,7 @@
 
 using namespace std;
 
-TEST_CASE("Vector with max value as 0 throws exception")
+TEST_CASE("Vector with max value of 0 throws exception")
 {
     auto vectors = GENERATE(
             vector<double> { -2, -1, 0 },
@@ -23,27 +23,17 @@ TEST_CASE("Empty vector results in empty vector")
     REQUIRE(emptyVec.empty());
 }
 
-TEST_CASE("{0, 1} vector should become {0, 2}")
+TEST_CASE("Max value in vector of same values equals any value")
 {
-    vector<double> test { 0, 1 };
-    vector<double> expected { 0, 2 };
+    vector<double> test { 3, 3, 3, 3, 3, 3 };
+    vector<double> expected { 2/1.5, 2/1.5, 2/1.5, 2/1.5, 2/1.5, 2/1.5 };
 
     DivideElementsByHalfMax(test);
 
     REQUIRE(test == expected);
 }
 
-TEST_CASE("{1, 1} vector should become {2, 2}")
-{
-    vector<double> test { 1, 1 };
-    vector<double> expected { 2, 2 };
-
-    DivideElementsByHalfMax(test);
-
-    REQUIRE(test == expected);
-}
-
-TEST_CASE("Vector with single value: { 1 } -> { 2 }")
+TEST_CASE("Max value in vector of size 1 should equal to the first element")
 {
     vector<double> test { 1 };
     vector<double> expected { 2 };
@@ -53,7 +43,7 @@ TEST_CASE("Vector with single value: { 1 } -> { 2 }")
     REQUIRE(test == expected);
 }
 
-TEST_CASE("1 to 5 vector")
+TEST_CASE("Max value in vector with values in ascending order should equal to the last element")
 {
     vector<double> test { 1, 2, 3, 4, 5 };
     vector<double> expected { 1 / 2.5,
