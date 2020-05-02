@@ -15,11 +15,11 @@ EntityMap const& GetHtmlEntitiesMap()
     return htmlEntityMap;
 }
 
-std::string HtmlDecode(const std::string& html)
+std::string HtmlDecode(std::string const& html)
 {
     std::string decoded;
 
-    auto entities = GetHtmlEntitiesMap();
+    EntityMap const& entities = GetHtmlEntitiesMap();
 
     auto it = html.begin();
     while (it != html.end())
@@ -30,7 +30,7 @@ std::string HtmlDecode(const std::string& html)
         if (*it == ENTITY_IDENTIFIER)
         {
             // If found, iterate through possible entities
-            for (const auto&[escaped, unescaped] : entities)
+            for (auto const& [escaped, unescaped] : entities)
             {
                 auto index = it - html.begin();
                 // From current index, substr length of possible entity and perform search on that
