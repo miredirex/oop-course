@@ -1,0 +1,3 @@
+add_executable(MiniDictionary main.cpp)
+
+target_link_libraries(MiniDictionary PRIVATE MiniDictionaryLib)
