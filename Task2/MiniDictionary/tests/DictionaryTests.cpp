@@ -1,5 +1,7 @@
+#define CATCH_CONFIG_MAIN
+
 #include <dictionary/Dictionary.h>
-#include "CatchRunner.h"
+#include <catch.hpp>
 
 using namespace std;
 
