@@ -32,7 +32,8 @@ int main(int argc, char* argv[])
         DeserializeDictionaryFromFile(arg->dictionaryFileName, dictionary);
     } else
     {
-        cout << "Запуск программы с параметром: MiniDictionary.exe <текстовый_файл.txt>" << endl;
+        cout << "Запускайте программу с параметром: MiniDictionary.exe <текстовый_файл.txt>" << endl;
+        cout << "чтобы работать с уже существующим словарем." << endl;
     }
 
     string userInput;

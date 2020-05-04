@@ -3,21 +3,22 @@
 #include <string>
 #include <fstream>
 #include <map>
-#include <vector>
 #include <optional>
-
-//todo: using TranslationMap = std::map<std::string, std::vector<std::string>>;
 
 class Dictionary
 {
 public:
-    [[nodiscard]] std::optional<std::string> GetTranslation(const std::string& word) const;
+    [[nodiscard]]
+    std::optional<std::string> GetTranslation(const std::string& word) const;
 
     void SaveTranslation(const std::string& untranslated, const std::string& translated);
 
-    void Serialize(std::ofstream& output) const;
+    void Serialize(std::ostream& output) const;
 
-    void Deserialize(std::ifstream& input, bool clearExistingDictionary);
+    void Deserialize(std::istream& input, bool clearExistingDictionary);
+
+    [[nodiscard]]
+    bool IsEmpty() const;
 
 private:
     const std::string TRANSLATION_DELIMITER = ":\t";

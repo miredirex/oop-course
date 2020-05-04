@@ -1,17 +1,23 @@
 #include <dictionary/Dictionary.h>
+#include <StringUtils.h>
+#include <algorithm>
+
+using namespace stringutils;
 
 std::optional<std::string> Dictionary::GetTranslation(const std::string& word) const
 {
-    bool containsKey = m_dictionary.find(word) != m_dictionary.end();
-    return containsKey ? std::optional(m_dictionary.at(word)) : std::nullopt;
+    std::string wordLowerCase = ToLowerCase(word);
+
+    bool containsKey = m_dictionary.find(wordLowerCase) != m_dictionary.end();
+    return containsKey ? std::optional(m_dictionary.at(wordLowerCase)) : std::nullopt;
 }
 
 void Dictionary::SaveTranslation(const std::string& untranslated, const std::string& translated)
 {
-    m_dictionary.insert({ untranslated, translated });
+    m_dictionary.insert({ ToLowerCase(untranslated), translated });
 }
 
-void Dictionary::Serialize(std::ofstream& output) const
+void Dictionary::Serialize(std::ostream& output) const
 {
     for (const auto&[word, translation] : m_dictionary)
     {
@@ -19,7 +25,7 @@ void Dictionary::Serialize(std::ofstream& output) const
     }
 }
 
-void Dictionary::Deserialize(std::ifstream& input, bool clearExistingDictionary)
+void Dictionary::Deserialize(std::istream& input, bool clearExistingDictionary)
 {
     if (clearExistingDictionary)
     {
@@ -41,4 +47,9 @@ void Dictionary::Deserialize(std::ifstream& input, bool clearExistingDictionary)
 
         m_dictionary.insert({ untranslated, translated });
     }
+}
+
+bool Dictionary::IsEmpty() const
+{
+    return m_dictionary.empty();
 }
