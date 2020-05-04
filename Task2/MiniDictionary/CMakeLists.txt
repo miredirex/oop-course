@@ -7,3 +7,4 @@ add_library(MiniDictionaryLib src/Dictionary.cpp src/DictionaryIO.cpp include/di
 target_include_directories(MiniDictionaryLib PUBLIC include)
 
 add_subdirectory(src)
+add_subdirectory(tests)

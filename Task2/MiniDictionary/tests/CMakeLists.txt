@@ -1,0 +1,3 @@
+add_executable(MiniDictionaryTests CatchRunner.h DictionaryTests.cpp)
+
+target_link_libraries(MiniDictionaryTests PRIVATE MiniDictionaryLib)
