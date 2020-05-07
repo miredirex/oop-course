@@ -3,6 +3,7 @@
 #include <string>
 #include <dictionary/Dictionary.h>
 #include <dictionary/DictionaryIO.h>
+#include <functional>
 
 class DictionaryApplication
 {
@@ -11,7 +12,7 @@ public:
 
     void RequestTranslation(const std::string& wordToTranslate);
 
-    void RequestSavingDictionary(const char* filename) const;
+    static void RequestSavingChanges(const std::function<void(bool)>& hasUserAgreedCallback);
 
     [[nodiscard]]
     bool HasUnsavedChanges() const;

@@ -1,34 +1,34 @@
 #include <dictionary/DictionaryApplication.h>
 #include <iostream>
+#include <functional>
 
 void DictionaryApplication::RequestTranslation(const std::string& wordToTranslate)
 {
-    printf("Неизвестное слово \"%s\". Введите перевод или пустую строку для отказа.\n", wordToTranslate.c_str());
+    std::cout << "Неизвестное слово \"" << wordToTranslate << "\". Введите перевод или пустую строку для отказа.\n";
 
     std::string userTranslation;
     getline(std::cin, userTranslation);
     if (userTranslation.empty())
     {
-        printf("Слово \"%s\" проигнорировано.\n", wordToTranslate.c_str());
+        std::cout << "Слово \"" << wordToTranslate << "\" проигнорировано.\n";
     } else
     {
         m_workingDictionary.SaveTranslation(wordToTranslate, userTranslation);
         m_hasUnsavedChanges = true;
 
-        printf("Слово \"%s\" сохранено в словаре как \"%s\"\n", wordToTranslate.c_str(), userTranslation.c_str());
+        std::cout << "Слово \"" << wordToTranslate << "\" сохранено в словаре как \"" << userTranslation << "\"\n";
     }
 }
 
-void DictionaryApplication::RequestSavingDictionary(const char* filename) const
+void DictionaryApplication::RequestSavingChanges(const std::function<void(bool)>& hasUserAgreedCallback)
 {
-    printf("В словарь были внесены изменения. Введите Y или y для сохранения перед выходом.\n");
+    std::cout << "В словарь были внесены изменения. Введите Y или y для сохранения перед выходом.\n";
 
     std::string action;
     getline(std::cin, action);
-    if (!action.empty() && tolower(action[0]) == 'y')
-    {
-        SerializeDictionaryToFile(filename, m_workingDictionary);
-    }
+
+    bool hasUserAgreed = ( !action.empty() && tolower(action[0]) == 'y' );
+    hasUserAgreedCallback(hasUserAgreed);
 }
 
 bool DictionaryApplication::HasUnsavedChanges() const

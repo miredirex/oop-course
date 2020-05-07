@@ -9,8 +9,6 @@ TEST_CASE("SaveTranslation/GetTranslation tests")
 {
     Dictionary dict;
 
-    REQUIRE(dict.IsEmpty());
-
     SECTION("Modification of the translation string shouldn't affect the already stored word")
     {
         // Arrange
@@ -52,8 +50,6 @@ TEST_CASE("SaveTranslation/GetTranslation tests")
         optional<string> translationThatExists = dict.GetTranslation("welcome");
 
         // Assert
-        REQUIRE(!dict.IsEmpty());
-
         REQUIRE(translation1 == nullopt);
         REQUIRE(translation2 == nullopt);
         REQUIRE(translation3 == nullopt);
@@ -64,8 +60,6 @@ TEST_CASE("SaveTranslation/GetTranslation tests")
 TEST_CASE("Dictionary serialization/deserialization tests")
 {
     Dictionary dict;
-
-    REQUIRE(dict.IsEmpty());
 
     SECTION("When non-empty dictionary is SERIALIZED to stream, stream is not empty")
     {
@@ -89,7 +83,7 @@ TEST_CASE("Dictionary serialization/deserialization tests")
         dict.Deserialize(ss, true);
 
         // Assert
-        REQUIRE(!dict.IsEmpty());
+        REQUIRE(dict.GetTranslation("word") != nullopt);
     }
 
     SECTION("Empty istream won't be saved to the dictionary")
@@ -101,7 +95,7 @@ TEST_CASE("Dictionary serialization/deserialization tests")
         dict.Deserialize(ss, true);
 
         // Assert
-        REQUIRE(dict.IsEmpty());
+        REQUIRE(dict.GetTranslation("") == nullopt);
     }
 
     SECTION("istream with no delimiter won't be saved to the dictionary")
@@ -113,6 +107,6 @@ TEST_CASE("Dictionary serialization/deserialization tests")
         dict.Deserialize(ss, true);
 
         // Assert
-        REQUIRE(dict.IsEmpty());
+        REQUIRE(dict.GetTranslation("example") == nullopt);
     }
 }

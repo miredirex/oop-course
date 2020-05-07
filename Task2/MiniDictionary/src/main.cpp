@@ -32,7 +32,7 @@ int main(int argc, char* argv[])
         DeserializeDictionaryFromFile(arg->dictionaryFileName, dictionary);
     } else
     {
-        cout << "Запуск программы должен происходить с параметром: MiniDictionary.exe <текстовый_файл.txt>" << endl;
+        cout << "Запуск программы должен происходить с параметром: MiniDictionary.exe <текстовый_файл.txt>\n";
         return 1;
     }
 
@@ -47,7 +47,7 @@ int main(int argc, char* argv[])
         optional<string> translation = dictionary.GetTranslation(userInput);
         if (translation.has_value())
         {
-            cout << *translation << endl;
+            cout << *translation << '\n';
         } else
         {
             dictionaryApp.RequestTranslation(userInput);
@@ -56,7 +56,13 @@ int main(int argc, char* argv[])
 
     if (dictionaryApp.HasUnsavedChanges())
     {
-        dictionaryApp.RequestSavingDictionary(arg->dictionaryFileName);
+        DictionaryApplication::RequestSavingChanges([&](bool hasUserAgreed)
+        {
+            if (hasUserAgreed)
+            {
+                SerializeDictionaryToFile(arg->dictionaryFileName, dictionary);
+            }
+        });
     }
 
     return 0;

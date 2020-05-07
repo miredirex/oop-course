@@ -17,9 +17,6 @@ public:
 
     void Deserialize(std::istream& input, bool clearExistingDictionary);
 
-    [[nodiscard]]
-    bool IsEmpty() const;
-
 private:
     const std::string TRANSLATION_DELIMITER = ":\t";
 

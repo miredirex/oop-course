@@ -8,20 +8,21 @@ std::optional<std::string> Dictionary::GetTranslation(const std::string& word) c
 {
     std::string wordLowerCase = ToLowerCase(word);
 
-    bool containsKey = m_dictionary.find(wordLowerCase) != m_dictionary.end();
-    return containsKey ? std::optional(m_dictionary.at(wordLowerCase)) : std::nullopt;
+    auto it = m_dictionary.find(wordLowerCase);
+    bool containsKey = (it != m_dictionary.end());
+    return containsKey ? std::optional(it->second) : std::nullopt;
 }
 
 void Dictionary::SaveTranslation(const std::string& untranslated, const std::string& translated)
 {
-    m_dictionary.insert({ ToLowerCase(untranslated), translated });
+    m_dictionary.emplace(ToLowerCase(untranslated), translated);
 }
 
 void Dictionary::Serialize(std::ostream& output) const
 {
     for (const auto&[word, translation] : m_dictionary)
     {
-        output << word << TRANSLATION_DELIMITER << translation << std::endl;
+        output << word << TRANSLATION_DELIMITER << translation << '\n';
     }
 }
 
@@ -47,9 +48,4 @@ void Dictionary::Deserialize(std::istream& input, bool clearExistingDictionary)
 
         m_dictionary.insert({ untranslated, translated });
     }
-}
-
-bool Dictionary::IsEmpty() const
-{
-    return m_dictionary.empty();
 }
