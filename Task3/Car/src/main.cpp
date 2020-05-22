@@ -1,14 +1,7 @@
 #include <iostream>
 #include <string>
 #include <car/Car.h>
-
-const char* COMMAND_INFO = "Info";
-const char* COMMAND_ENGINE_ON = "EngineOn";
-const char* COMMAND_ENGINE_OFF = "EngineOff";
-const char* COMMAND_SET_GEAR = "SetGear";
-const char* COMMAND_SET_SPEED = "SetSpeed";
-
-const char* COMMAND_QUIT = "Quit";
+#include <car/CarApplication.h>
 
 int main()
 {
@@ -17,108 +10,45 @@ int main()
     Car car;
 
     std::string command;
-    while (command != COMMAND_QUIT)
+    while (command != application::COMMAND_QUIT)
     {
         std::cin >> command;
 
-        if (command == COMMAND_INFO)
+        if (command == application::COMMAND_INFO)
         {
-            std::cout << "Двигатель автомобиля: " << (car.IsStarted() ? "включён" : "выключен") << '\n';
-            std::cout << "Автомобиль ";
-            switch (car.GetDirection())
-            {
-                case MoveDirection::STILL:
-                    std::cout << "стоит на месте\n";
-                    break;
-                case MoveDirection::FORWARD:
-                    std::cout << "движется вперёд.\n";
-                    break;
-                case MoveDirection::BACKWARD:
-                    std::cout << "движется назад.\n";
-                    break;
-            }
-            std::cout << "Скорость: " << car.GetSpeed() << '\n';
-            std::string gearName;
-            switch (car.GetGear())
-            {
-                case Gear::REVERSE:
-                    gearName = "задняя";
-                    break;
-                case Gear::NEUTRAL:
-                    gearName = "нейтральная";
-                    break;
-                case Gear::FIRST:
-                    gearName = "первая";
-                    break;
-                case Gear::SECOND:
-                    gearName = "вторая";
-                    break;
-                case Gear::THIRD:
-                    gearName = "третья";
-                    break;
-                case Gear::FOURTH:
-                    gearName = "четвертая";
-                    break;
-                case Gear::FIFTH:
-                    gearName = "пятая";
-                    break;
-            }
-            std::cout << "Передача: " << gearName << '\n';
+            application::PrintCarInfo(car);
             continue;
         }
-
-        if (command == COMMAND_ENGINE_ON)
+        else if (command == application::COMMAND_ENGINE_ON)
         {
-            if (car.TurnOnEngine())
-            {
-                std::cout << "Двигатель был включен\n";
-            } else
-            {
-                std::cout << "Двигатель уже включен\n";
-            }
+            application::TurnOnCarEngine(car);
             continue;
         }
-
-        if (command == COMMAND_ENGINE_OFF)
+        else if (command == application::COMMAND_ENGINE_OFF)
         {
-            if (car.TurnOffEngine())
-            {
-                std::cout << "Двигатель был выключен\n";
-            } else
-            {
-                std::cout << "Двигатель либо уже был выключен, либо машина находится "
-                             "в движении.\n";
-            }
+            application::TurnOffCarEngine(car);
             continue;
         }
-
-        if (command == COMMAND_SET_SPEED)
+        else if (command == application::COMMAND_SET_SPEED)
         {
             int speedParameter;
             std::cin >> speedParameter;
 
-            if (car.SetSpeed(speedParameter))
-            {
-                std::cout << "Теперь автомобиль двигается со скоростью " << car.GetSpeed() << '\n';
-            } else
-            {
-                std::cout << "Не удалось выставить скорость.\n";
-            }
+            application::SetCarSpeed(car, speedParameter);
             continue;
         }
-
-        if (command == COMMAND_SET_GEAR)
+        else if (command == application::COMMAND_SET_GEAR)
         {
             int gearParameter;
             std::cin >> gearParameter;
 
-            if (car.SetGear(gearParameter))
-            {
-                std::cout << "Передача была успешно переключена\n";
-            } else
-            {
-                std::cout << "Не удалось переключить передачу\n";
-            }
+            application::SetCarGear(car, gearParameter);
+            continue;
+        }
+        else
+        {
+            std::cout << "Unknown command\nAll commands:\n";
+            application::PrintCommandList();
             continue;
         }
     }

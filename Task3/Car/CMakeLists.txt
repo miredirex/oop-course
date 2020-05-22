@@ -3,7 +3,7 @@ project(Car)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_library(CarLib src/Car.cpp src/IntRange.cpp)
+add_library(CarLib src/Car.cpp src/IntRange.cpp src/EnumUtil.cpp src/CarApplication.cpp)
 target_include_directories(CarLib PUBLIC include)
 
 add_subdirectory(src)
