@@ -18,6 +18,8 @@ std::string GearToString(Gear g)
             return "fourth";
         case Gear::FIFTH:
             return "fifth";
+        default:
+            return "undefined";
     }
 }
 
@@ -31,5 +33,7 @@ std::string MoveDirectionToString(MoveDirection dir)
             return "forward";
         case MoveDirection::BACKWARD:
             return "backward";
+        default:
+            return "undefined";
     }
 }

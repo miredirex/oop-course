@@ -3,8 +3,7 @@
 struct IntRange
 {
 public:
-    IntRange(int start, int endInclusive) : m_start(start), m_endInclusive(endInclusive)
-    {};
+    IntRange(int start, int endInclusive) : m_start(start), m_endInclusive(endInclusive) {}
 
     [[nodiscard]] int GetFirst() const;
 

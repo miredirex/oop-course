@@ -136,15 +136,45 @@ TEST_CASE("Gears and ranges")
         REQUIRE_FALSE(car.SetGear(100));
     }
 
-    SECTION("Setting any gear if moving backwards should be impossible")
+    SECTION("Setting any gear except neutral if moving backwards should be impossible")
     {
         REQUIRE(car.TurnOnEngine());
 
         REQUIRE(car.SetGear(-1));
-        REQUIRE(car.SetSpeed(5));
+        REQUIRE(car.SetSpeed(-5));
         REQUIRE(car.GetDirection() == MoveDirection::BACKWARD);
 
-        REQUIRE_FALSE(car.SetGear(0));
+        REQUIRE(car.SetGear(0));
         REQUIRE_FALSE(car.SetGear(1));
+    }
+
+    SECTION("Setting reverse gear is only allowed when the speed is zero")
+    {
+        REQUIRE(car.TurnOnEngine());
+
+        REQUIRE(car.SetGear(1));
+        REQUIRE(car.SetSpeed(20));
+        REQUIRE(car.SetGear(0));
+
+        REQUIRE(car.GetDirection() == MoveDirection::FORWARD);
+
+        REQUIRE_FALSE(car.SetGear(-1));
+
+        REQUIRE(car.SetSpeed(0));
+
+        REQUIRE(car.SetGear(-1));
+    }
+
+    SECTION("Setting positive speed is not allowed when moving backward")
+    {
+        REQUIRE(car.TurnOnEngine());
+        REQUIRE(car.SetGear(-1));
+        REQUIRE(car.SetSpeed(-18));
+
+        // Check
+        REQUIRE_FALSE(car.SetSpeed(1));
+        REQUIRE(car.SetGear(0));
+        REQUIRE_FALSE(car.SetSpeed(1));
+        REQUIRE(car.SetSpeed(-1));
     }
 }

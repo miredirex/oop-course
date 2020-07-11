@@ -27,12 +27,7 @@ bool Car::IsStarted() const
 
 bool Car::SetGear(Gear gear)
 {
-    // Switching gears is impossible if moving backward
-    if (gear > Gear::REVERSE && GetDirection() == MoveDirection::BACKWARD)
-    {
-        return false;
-    }
-    // Switching to the same gear is fine
+    // Switching to the same gear is ok
     if (gear == m_currentGear)
     {
         return true;
@@ -68,9 +63,14 @@ bool Car::SetSpeed(int speed)
     {
         return false;
     }
-    if (m_currentGear == Gear::NEUTRAL && speed > m_currentSpeed)
+    if (m_currentGear == Gear::NEUTRAL)
     {
-        return false;
+        // While on neutral, car can only decelerate towards 0
+        if (m_currentSpeed >= 0 && (speed > m_currentSpeed || speed < 0) ||
+            m_currentSpeed <= 0 && (speed < m_currentSpeed || speed > 0))
+        {
+            return false;
+        }
     }
 
     m_currentSpeed = speed;
@@ -84,13 +84,15 @@ int Car::GetSpeed() const
 
 MoveDirection Car::GetDirection() const
 {
-    if (m_currentGear != Gear::REVERSE && m_currentSpeed > 0)
+    if (m_currentSpeed > 0)
     {
         return MoveDirection::FORWARD;
-    } else if (m_currentGear == Gear::REVERSE && m_currentSpeed > 0)
+    }
+    else if (m_currentSpeed < 0)
     {
         return MoveDirection::BACKWARD;
-    } else
+    }
+    else
     {
         return MoveDirection::STILL;
     }

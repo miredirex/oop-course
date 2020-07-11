@@ -3,10 +3,18 @@
 #include <car/Car.h>
 #include <car/CarApplication.h>
 
+inline bool IsConvertibleToInt(const std::string& s)
+{
+    if(s.empty() || ((!isdigit(s[0])) && (s[0] != '-') && (s[0] != '+'))) return false;
+
+    char* p;
+    strtol(s.c_str(), &p, 10);
+
+    return (*p == 0);
+}
+
 int main()
 {
-    setlocale(LC_ALL, "ru-RU.UTF-8");
-
     Car car;
 
     std::string command;
@@ -31,18 +39,34 @@ int main()
         }
         else if (command == application::COMMAND_SET_SPEED)
         {
-            int speedParameter;
+            std::string speedParameter;
             std::cin >> speedParameter;
 
-            application::SetCarSpeed(car, speedParameter);
+            if (IsConvertibleToInt(speedParameter))
+            {
+                application::SetCarSpeed(car, std::stoi(speedParameter));
+            }
+            else
+            {
+                application::PrintBadInput();
+            }
+
             continue;
         }
         else if (command == application::COMMAND_SET_GEAR)
         {
-            int gearParameter;
+            std::string gearParameter;
             std::cin >> gearParameter;
 
-            application::SetCarGear(car, gearParameter);
+            if (IsConvertibleToInt(gearParameter))
+            {
+                application::SetCarGear(car, std::stoi(gearParameter));
+            }
+            else
+            {
+                application::PrintBadInput();
+            }
+
             continue;
         }
         else

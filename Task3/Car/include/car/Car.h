@@ -38,8 +38,8 @@ private:
 
     const IntRange m_gearSpeedRanges[7]
     {
-        IntRange(0, 20),  // Reverse
-        IntRange(0, MAX_AVAILABLE_SPEED), // Neutral
+        IntRange(-20, 0),  // Reverse
+        IntRange(-20, MAX_AVAILABLE_SPEED), // Neutral
         IntRange(0, 30),  // First
         IntRange(20, 50), // Second
         IntRange(30, 60), // Third

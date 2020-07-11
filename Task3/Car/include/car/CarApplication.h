@@ -9,6 +9,7 @@ namespace application
     constexpr const auto COMMAND_SET_GEAR = "SetGear";
     constexpr const auto COMMAND_SET_SPEED = "SetSpeed";
     constexpr const auto COMMAND_QUIT = "Quit";
+    constexpr const auto ERR_BAD_INPUT = "Bad input parameter\nTry again";
 
     void PrintCarInfo(const Car& car);
 
@@ -21,5 +22,7 @@ namespace application
     void SetCarGear(Car& car, int gear);
 
     void PrintCommandList();
+
+    void PrintBadInput();
 }
 

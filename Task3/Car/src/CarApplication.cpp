@@ -64,3 +64,8 @@ void application::PrintCommandList()
               << application::COMMAND_SET_SPEED << '\n'
               << application::COMMAND_QUIT << '\n';
 }
+
+void application::PrintBadInput()
+{
+    std::cout << application::ERR_BAD_INPUT << '\n';
+}
