@@ -1,6 +1,8 @@
+#define _USE_MATH_DEFINES
+
+#include <cmath>
 #include <sstream>
 #include <iomanip>
-#include <SDL_stdinc.h>
 #include "shape/Circle.h"
 
 double Circle::GetArea() const

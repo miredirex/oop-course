@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.16)
-project(Shapes)
 
+# Setup vcpkg
+set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/../../vcpkg/scripts/buildsystems/vcpkg.cmake
+        CACHE STRING "Vcpkg toolchain file")
+
+project(Shapes)
 set(CMAKE_CXX_STANDARD 17)
 
 set(Shapes_SOURCE_FILES
@@ -17,22 +21,14 @@ set(Shapes_SOURCE_FILES
 add_library(ShapesLib ${Shapes_SOURCE_FILES})
 target_include_directories(ShapesLib PUBLIC include)
 
-# SDL2 GFX
-set(SDL2_GFX_SOURCE_FILES
-        ${PROJECT_SOURCE_DIR}/SDL2_gfx/SDL2_gfxPrimitives.c
-        ${PROJECT_SOURCE_DIR}/SDL2_gfx/SDL2_rotozoom.c
-        ${PROJECT_SOURCE_DIR}/SDL2_gfx/SDL2_gfxPrimitives.h
-        ${PROJECT_SOURCE_DIR}/SDL2_gfx/SDL2_rotozoom.h)
-
 # SDL2
-add_library(SDL2 ${SDL2_GFX_SOURCE_FILES})
-set_target_properties(SDL2 PROPERTIES LINKER_LANGUAGE C)
-target_include_directories(SDL2 PUBLIC ${PROJECT_SOURCE_DIR}/SDL2/include)
-target_include_directories(SDL2 PUBLIC ${PROJECT_SOURCE_DIR}/SDL2_gfx)
-target_link_libraries(SDL2 ${PROJECT_SOURCE_DIR}/SDL2/lib/x86/SDL2.lib ${PROJECT_SOURCE_DIR}/SDL2/lib/x86/SDL2main.lib)
+find_package(SDL2 CONFIG REQUIRED)
 
-# Link SDL2 to ShapesLib
-target_link_libraries(ShapesLib SDL2)
+# SDL2 GFX
+find_package(sdl2-gfx CONFIG REQUIRED)
+
+target_link_libraries(ShapesLib PUBLIC SDL2::SDL2 SDL2::SDL2main)
+target_link_libraries(ShapesLib PRIVATE SDL2::SDL2_gfx)
 
 add_subdirectory(src)
 add_subdirectory(tests)
