@@ -22,10 +22,10 @@ add_library(ShapesLib ${Shapes_SOURCE_FILES})
 target_include_directories(ShapesLib PUBLIC include)
 
 # SDL2
-find_package(SDL2 CONFIG REQUIRED)
+find_package(SDL2 REQUIRED)
 
 # SDL2 GFX
-find_package(sdl2-gfx CONFIG REQUIRED)
+find_package(sdl2-gfx REQUIRED)
 
 target_link_libraries(ShapesLib PUBLIC SDL2::SDL2 SDL2::SDL2main)
 target_link_libraries(ShapesLib PRIVATE SDL2::SDL2_gfx)
