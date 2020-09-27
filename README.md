@@ -1,4 +1,4 @@
 # Объектно-ориентированное программирование
 
-Boostrap vcpkg:  
+Bootstrap vcpkg:  
 `./vcpkg/bootstrap-vcpkg.sh` / `vcpkg/bootstrap-vcpkg.bat`
